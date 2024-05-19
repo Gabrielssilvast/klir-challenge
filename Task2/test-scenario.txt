@@ -1,0 +1,72 @@
+Using Guerkin language I was able to analyze the following topics:
+
+ - Interaction with the user on the welcome screen.
+ - Verification of information on the Customer List screen.
+ - Verification of detailed data on the contact details screen.
+
+1) Scenario: User Interaction on Welcome Screen
+    a) Given the user is on the Welcome Screen
+    When the user fills the name field with Name, numbers or special characters
+    And clicks the 'Submit' button
+    Then the message "Hi <Name, numbers or special characters>. It is now <current_date> and here is our customer list. Click on each of them to view their contact details."
+    And the Customer List is displayed
+
+    b) Given the user is on the Welcome Screen
+    When the user click on'Submit' leaving the field without any type of filling
+    Then an alert is displayed with the message "Please provide your name"
+
+2) Scenario: Checking Information on Customer List Screen
+    a) Given the user is on the Customer List Screen
+    Then the following information is displayed: "Name", "# of Employees" and "Size"
+    And only the name column company will be clickable
+
+    b) Given the user is on the Customer List Screen
+    When a customer has "# of employees" less than or equal to 2500
+    Then the Customer "Size" is Small
+        Results: All small companies satisfy the condition
+
+    c) Given the user is on the Customer List Screen
+    When a customer has "# of employees" bigger than 2500 and less than or equal to 5000
+    Then the Customer "Size" is Medium
+        Results: Las Vegas Water Size: Big (Error: Expected "Medium")
+
+    d) Given the user is on the Customer List Screen
+    When a customer has "# of employees" bigger than 5000
+    Then the Customer "Size" is Big
+        Results: Las Vegas Water Size: Big (Error: Expected "Medium")
+
+    e) Given the user is on the Customer List Screen
+    When the user clicks on a customer name
+    Then the Contacts Detail Screen is shown
+        Results:Las Vegas Water         OK
+                Los Angels Water        OK
+                San Francisco's Water   OK
+                New York's Water        OK
+                Miami's Water           OK
+                Chicago's Water         OK
+                Denver's Water          Error: Only an empty page is displayed. Expected: Show this the message **No contact info available**
+
+3) Scenario: Checking Detailed Information on Contacts Detail Screen
+    a) Given the user is on the Customer List Screen
+    When the user clicks on a customer name
+    Then the screen shows the customer's detailed info (Name, # of Employees, Size and a Contact person with your e-mail address)
+    And the "name" and "email" of the contact person in the company are displayed
+        Results:Las Vegas Water         OK
+                Los Angels Water        OK
+                San Francisco's Water   OK
+                New York's Water        Error: Only the contact e-mail appears.(Expected: Contact Person and E-mail address)
+                Miami's Water           OK
+                Chicago's Water         OK
+                Denver's Water          OK
+
+    c) Given the user is on the Customer List Screen
+    When the user clicks on a customer name
+    And clicks on the 'Back to the list' button
+    Then the Customer's list page is shown
+        Results:Las Vegas Water         OK
+                Los Angels Water        OK
+                San Francisco's Water   OK
+                New York's Water        OK
+                Miami's Water           OK
+                Chicago's Water         OK
+                Denver's Water          ERROR: Empty Page. This error has already been recorded in topic 2) letter e)
