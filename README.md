@@ -1,1 +1,0 @@
-# klir-challenge
