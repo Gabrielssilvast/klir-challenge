@@ -1,11 +1,16 @@
-Klir Automation Challenge
+## Klir Automation Challenge
 
 This challenge contains 4 stages:
 
 Task 1: Test Environment Setup
+
 Task 2: Create a test plan and run it manually
+
 Task 3: Create an automated API level test scenario
+
 Task 4: Create an automated UI level test scenario
+
+
 
 1. Download/Install NodeJS/NPM:
    Access the link https://nodejs.org/, download version v14.20.1 the same one used in this project
